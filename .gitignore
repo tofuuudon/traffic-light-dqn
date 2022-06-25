@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+logs/
+
+# PyCharm
+.idea/
+
+# Environment
+venv/
+.env
+.python-version
+
+# CTags
+tags
+.tags
