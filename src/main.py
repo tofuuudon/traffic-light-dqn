@@ -16,14 +16,7 @@ else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
 sumoBinary = checkBinary("sumo")
-sumoCmd = [
-    sumoBinary,
-    "-W",
-    "-c",
-    "data/train-network/osm.sumocfg",
-    "--statistic-output",
-    "report/statistic.xml",
-]
+sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 traci.start(sumoCmd)
 STEP = 0
