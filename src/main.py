@@ -18,6 +18,7 @@ else:
 sumoBinary = checkBinary("sumo")
 sumoCmd = [
     sumoBinary,
+    "-W",
     "-c",
     "data/train-network/osm.sumocfg",
     "--statistic-output",
