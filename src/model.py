@@ -2,6 +2,8 @@
 
 from typing import Any
 
+from numpy import float64
+from numpy._typing import NDArray
 from torch.functional import Tensor
 from torch.nn import Module
 from torch.nn.modules.activation import ReLU
@@ -9,13 +11,13 @@ from torch.nn.modules.container import Sequential
 from torch.nn.modules.linear import Linear
 
 
-class Model(Module):
-    """MLP model"""
+class PolicyModel(Module):
+    """A simple MLP model"""
 
     def __init__(
         self,
-        obs_space: tuple[int, ...],
-        action_space: tuple[int, ...],
+        obs_space: NDArray[float64],
+        n_action: int,
         hidden_layers: int = 128,
     ) -> None:
 
@@ -23,13 +25,13 @@ class Model(Module):
 
         # Environment
         self.obs_space = obs_space
-        self.action_space = action_space
+        self.n_action = n_action
 
         # Network
         self.net = Sequential(
             Linear(len(obs_space), hidden_layers),
             ReLU(),
-            Linear(hidden_layers, len(action_space)),
+            Linear(hidden_layers, n_action),
         )
 
     def forward(self, x: Tensor) -> Any:

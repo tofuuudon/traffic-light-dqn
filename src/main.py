@@ -39,7 +39,7 @@ TLS_NODES: tuple[TrafficLightSystem, ...] = tuple(
     for tls_id in traci.trafficlight.getIDList()
 )
 
-model = DQN()
+model = DQN(TLS_NODES)
 
 trainer = Trainer(
     max_epochs=150,

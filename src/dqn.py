@@ -1,13 +1,15 @@
 """Deep Q-learning (DQN) network."""
 
 from typing import Any
+from numpy import array
 
 from torch.functional import Tensor
 from torch.optim import Adam
 from pytorch_lightning import LightningModule
 
 from agent import Agent
-from model import Model
+from model import PolicyModel
+from _typings import TrafficLightSystem
 
 
 class DQN(LightningModule):
@@ -15,6 +17,7 @@ class DQN(LightningModule):
 
     def __init__(
         self,
+        tls_nodes: tuple[TrafficLightSystem, ...],
         gamma: float = 0.99,
         alpha: float = 1e-2,
         batch_size: int = 16,
@@ -41,13 +44,14 @@ class DQN(LightningModule):
         self.replay_size = replay_size
 
         # Enviroment
-        obs_space = (5,)
-        action_space = (5,)
+        self.tls_nodes = tls_nodes
+        obs_space = array([tls_nodes[0].lane_ids])
+        n_actions = int(len(tls_nodes[0].phases) / 2)  # Half of the phases are yellows
 
         # Instances
-        self.net = Model(obs_space, action_space)
-        self.target_net = Model(obs_space, action_space)
-        self.agent = Agent(obs_space, action_space)
+        self.net = PolicyModel(obs_space, n_actions)
+        self.target_net = PolicyModel(obs_space, n_actions)
+        self.agent = Agent(obs_space, n_actions)
 
     def forward(self, x: Tensor) -> Any:  # type: ignore
         """Computes output tensors.
