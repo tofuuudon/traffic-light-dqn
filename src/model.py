@@ -30,14 +30,14 @@ class Model(Module):
             Linear(hidden_layers, len(action_space)),
         )
 
-    def forward(self, x: Tensor):
+    def forward(self, x: Tensor) -> Tensor:
         """Computes output tensors.
 
         Args:
             x (Tensor): Input tensor for computation.
 
         Returns:
-            Any: Output tensor.
+            Tensor: Output tensor.
         """
 
         return self.net(x.float())

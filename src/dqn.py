@@ -31,14 +31,14 @@ class DQN(LightningModule):
         self.net = Model(obs_space, action_space)
         self.agent = Agent(obs_space, action_space)
 
-    def forward(self, x: Tensor) -> Tensor:
+    def forward(self, x: Tensor) -> Tensor:  # type: ignore
         """Computes output tensors.
 
         Args:
             x (Tensor): Input tensor for computation.
 
         Returns:
-            Any: Output tensor.
+            Tensor: Output tensor.
         """
 
         return self.net(x)
