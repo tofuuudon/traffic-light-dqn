@@ -46,6 +46,14 @@ class DQN(LightningModule):
         self.net = Model(obs_space, action_space)
         self.agent = Agent(obs_space, action_space)
 
+    def __get_mse_loss(self):
+        pass
+
+    def training_step(self):
+        """A time step in the simulation."""
+
+        return self.__get_mse_loss()
+
     def forward(self, x: Tensor) -> Tensor:  # type: ignore
         """Computes output tensors.
 
