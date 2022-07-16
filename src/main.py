@@ -3,10 +3,10 @@
 import os
 import sys
 
-# pylint disable: import-error
-
 import traci
 from sumolib import checkBinary
+
+from _typings import TrafficLightSystem
 
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
@@ -19,15 +19,14 @@ sumoBinary = checkBinary("sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 STEP = 0
-N_STEP = 3600
+N_STEP = 1
 
 traci.start(sumoCmd)
 
-# Gets all 4-way intersections with 16 states
-TLS_IDS: list[int] = [
-    id
+# IDs of all traffic lights
+TLS_NODES: list[TrafficLightSystem] = [
+    TrafficLightSystem(id, traci.trafficlight.getControlledLanes(id))
     for id in traci.trafficlight.getIDList()
-    if len(traci.trafficlight.getRedYellowGreenState(id)) == 16
 ]
 
 # Runtime
