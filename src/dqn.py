@@ -3,11 +3,11 @@
 from typing import Any
 from numpy import array
 
+import traci
 from torch.functional import Tensor
 from torch.optim import Adam
 from pytorch_lightning import LightningModule
 
-from agent import Agent
 from model import PolicyModel
 from _typings import TrafficLightSystem
 
@@ -45,13 +45,18 @@ class DQN(LightningModule):
 
         # Enviroment
         self.tls_nodes = tls_nodes
+
         obs_space = array([tls_nodes[0].lane_ids])
         n_actions = int(len(tls_nodes[0].phases) / 2)  # Half of the phases are yellows
 
         # Instances
         self.net = PolicyModel(obs_space, n_actions)
         self.target_net = PolicyModel(obs_space, n_actions)
-        self.agent = Agent(obs_space, n_actions)
+
+    def training_step(self) -> None:  # type: ignore
+        """Actions a single time-step."""
+
+        traci.simulationStep()
 
     def forward(self, x: Tensor) -> Any:  # type: ignore
         """Computes output tensors.
