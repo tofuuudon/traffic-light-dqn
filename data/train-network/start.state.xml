@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-07-16 18:57:37 by Eclipse SUMO GUI Version 1.13.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="data/train-network/osm.net.xml"/>
+        <route-files value="data/train-network/osm.passenger.trips.xml"/>
+        <additional-files value="data/train-network/osm.poly.xml"/>
+    </input>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <no-warnings value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="57656"/>
+    </traci_server>
+
+    <gui_only>
+        <gui-settings-file value="data/train-network/osm.view.xml"/>
+    </gui_only>
+
+</configuration>
+-->
+
+<snapshot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/state_file.xsd" version="1.13.0" time="0.00" type="micro">
+    <route id="!0" state="0" edges="27178477#0 -148011238#4"/>
+    <route id="!1" state="0" edges="-4253846#4 -27178595"/>
+    <delay number="0" begin="2" end="0" depart="0.00" time="0.00"/>
+    <vType id="DEFAULT_VEHTYPE"/>
+    <vehicle id="0" depart="0.00" route="!0" distance="0 0" speedFactor="1.0600" reroute="1" state="262144 9223372036854775807 0 -1.00 0 0.00 0 0 0" pos="0.00 0.00 0.00" speed="0.00 0.00" angle="90.00" posLat="0.00" waitingTime="100000 0">
+        <device id="routing_0" state="0"/>
+    </vehicle>
+    <vehicle id="1" depart="1.00" route="!1" distance="0 0" speedFactor="0.9383" reroute="1" state="262144 9223372036854775807 0 -1.00 0 0.00 0 0 0" pos="0.00 0.00 0.00" speed="0.00 0.00" angle="90.00" posLat="0.00" waitingTime="100000 0">
+        <device id="routing_1" state="0"/>
+    </vehicle>
+    <tlLogic id="GS_102025" programID="0" phase="0" duration="0"/>
+    <tlLogic id="GS_102031" programID="0" phase="0" duration="0"/>
+    <tlLogic id="GS_110007" programID="0" phase="0" duration="0"/>
+    <tlLogic id="GS_110008" programID="0" phase="0" duration="0"/>
+    <tlLogic id="GS_275423" programID="0" phase="0" duration="0"/>
+</snapshot>

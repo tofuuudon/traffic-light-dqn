@@ -1,6 +1,7 @@
 """Deep Q-learning (DQN) network."""
 
 from torch.functional import Tensor
+from torch.optim import Adam
 from pytorch_lightning import LightningModule
 from agent import Agent
 
@@ -11,8 +12,23 @@ class DQN(LightningModule):
     """DQN model for TLS."""
 
     def __init__(
-        self, gamma: float, alpha: float, batch_size: int, replay_size: int
+        self,
+        gamma: float = 0.99,
+        alpha: float = 1e-2,
+        batch_size: int = 16,
+        replay_size: int = 1000,
     ) -> None:
+        """__init__.
+
+        Args:
+            gamma (float): gamma
+            alpha (float): alpha
+            batch_size (int): batch_size
+            replay_size (int): replay_size
+
+        Returns:
+            None:
+        """
 
         super().__init__()
 
@@ -23,7 +39,6 @@ class DQN(LightningModule):
         self.replay_size = replay_size
 
         # Enviroment
-        # TODO: Use real state and action space
         obs_space = (5,)
         action_space = (5,)
 
@@ -42,3 +57,12 @@ class DQN(LightningModule):
         """
 
         return self.net(x)
+
+    def configure_optimizers(self) -> Adam:
+        """Uses Adam optimizer to find gradient.
+
+        Returns:
+            Adam: The optimizer.
+        """
+
+        return Adam(self.net.parameters(), self.alpha)
