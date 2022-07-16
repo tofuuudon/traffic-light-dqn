@@ -1,10 +1,12 @@
 """Deep Q-learning (DQN) network."""
 
+from typing import Any
+
 from torch.functional import Tensor
 from torch.optim import Adam
 from pytorch_lightning import LightningModule
-from agent import Agent
 
+from agent import Agent
 from model import Model
 
 
@@ -44,17 +46,10 @@ class DQN(LightningModule):
 
         # Instances
         self.net = Model(obs_space, action_space)
+        self.target_net = Model(obs_space, action_space)
         self.agent = Agent(obs_space, action_space)
 
-    def __get_mse_loss(self):
-        pass
-
-    def training_step(self):
-        """A time step in the simulation."""
-
-        return self.__get_mse_loss()
-
-    def forward(self, x: Tensor) -> Tensor:  # type: ignore
+    def forward(self, x: Tensor) -> Any:  # type: ignore
         """Computes output tensors.
 
         Args:

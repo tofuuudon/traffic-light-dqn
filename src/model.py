@@ -1,5 +1,7 @@
 """MLP model for predicting Q-values."""
 
+from typing import Any
+
 from torch.functional import Tensor
 from torch.nn import Module
 from torch.nn.modules.activation import ReLU
@@ -30,7 +32,7 @@ class Model(Module):
             Linear(hidden_layers, len(action_space)),
         )
 
-    def forward(self, x: Tensor) -> Tensor:
+    def forward(self, x: Tensor) -> Any:
         """Computes output tensors.
 
         Args:

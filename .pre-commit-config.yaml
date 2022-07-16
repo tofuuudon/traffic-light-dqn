@@ -15,7 +15,3 @@ repos:
     rev: v1.3.0
     hooks:
       - id: python-safety-dependencies-check
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.961
-    hooks:
-      - id: mypy
