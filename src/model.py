@@ -1,13 +1,12 @@
 """MLP model for predicting Q-values."""
 from typing import Any
 
-from numpy import float64
-from numpy._typing import NDArray
-from pytorch_lightning.core.lightning import LightningModule
+from torch._C import Size
 from torch.functional import Tensor
 from torch.nn.modules.activation import ReLU
 from torch.nn.modules.container import Sequential
 from torch.nn.modules.linear import Linear
+from pytorch_lightning.core.lightning import LightningModule
 
 
 class PolicyModel(LightningModule):
@@ -15,7 +14,7 @@ class PolicyModel(LightningModule):
 
     def __init__(
         self,
-        obs_space: NDArray[float64],
+        obs_space: Size,
         n_action: int,
         hidden_layers: int = 128,
     ) -> None:

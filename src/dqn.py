@@ -4,7 +4,6 @@ from typing import Any
 from random import choice, random
 
 import traci
-from numpy import array
 from torch.functional import Tensor
 
 from model import PolicyModel
@@ -44,7 +43,7 @@ class DQN:
         # Enviroment
         self.node = node
 
-        obs_space = array([node.lane_ids])
+        obs_space = self.__get_state().shape
         n_actions = int(len(node.phases) / 2)  # Half of the phases are yellows
 
         # Instances
@@ -52,11 +51,9 @@ class DQN:
         self.target_net = PolicyModel(obs_space, n_actions)
         self.memory = ReplayMemory(replay_size)
 
-    def __get_action(self) -> Any:
-        """Gets an action from current simulation state."""
+    def __get_state(self) -> Tensor:
 
-        # Gets environment states
-        state = Tensor(
+        return Tensor(
             [
                 [
                     traci.lanearea.getJamLengthVehicle(f"{self.node.tls_id}-{lane_id}")
@@ -64,6 +61,11 @@ class DQN:
                 ]
             ]
         )
+
+    def __get_action(self) -> Any:
+        """Gets an action from current simulation state."""
+
+        state = self.__get_state()
 
         if random() < self.epision:
             action = choice(self.memory.sample(self.batch_size)).action
