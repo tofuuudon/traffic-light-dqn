@@ -5,9 +5,7 @@ import sys
 
 import traci
 from sumolib import checkBinary
-from pytorch_lightning import Trainer
 
-from dqn import DQN
 from _typings import TrafficLightSystem
 
 # Checks for SUMO_HOME enviroment
@@ -38,13 +36,5 @@ TLS_NODES: tuple[TrafficLightSystem, ...] = tuple(
     )
     for tls_id in traci.trafficlight.getIDList()
 )
-
-model = DQN(TLS_NODES)
-
-trainer = Trainer(
-    max_epochs=150,
-)
-
-trainer.fit(model)
 
 traci.close()
