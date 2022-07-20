@@ -15,12 +15,14 @@ if "SUMO_HOME" in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-sumoBinary = checkBinary("sumo")
+sumoBinary = checkBinary("sumo-gui")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
+EPISODES = 10
+MAX_STEP = 500
 
 traci.start(sumoCmd)
 
@@ -36,5 +38,12 @@ TLS_NODES: tuple[TrafficLightSystem, ...] = tuple(
     )
     for tls_id in traci.trafficlight.getIDList()
 )
+
+# Runner
+for ep in range(EPISODES):
+    for step in range(MAX_STEP):
+        traci.simulationStep()
+    traci.simulation.loadState(START_STATE_PATH)
+
 
 traci.close()
