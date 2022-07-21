@@ -11,7 +11,7 @@ from replay_memory import ReplayMemory
 from _typings import TrafficLightSystem
 
 
-class DQN:
+class Agent:
     """DQN model for TLS."""
 
     def __init__(
@@ -44,7 +44,7 @@ class DQN:
         self.node = node
 
         obs_space = self.__get_state().shape
-        n_actions = int(len(node.phases) / 2)  # Half of the phases are yellows
+        n_actions = len(node.phases)
 
         # Instances
         self.net = PolicyModel(obs_space, n_actions)
@@ -62,6 +62,7 @@ class DQN:
             ]
         )
 
+    # pylint: disable-next=unused-private-member
     def __get_action(self) -> Any:
         """Gets an action from current simulation state."""
 
@@ -73,10 +74,22 @@ class DQN:
             action = self.net(state)
         return action
 
-    def step(self) -> None:
-        """Simulation step."""
+    def prepare_step(self) -> None:
+        """Prepares the action to take before time step."""
 
-        if len(self.memory) < self.batch_size:
-            return
+        # TODO: Gets the current state
 
-        self.__get_action()
+        # TODO: Gets the next action
+
+        # TODO: Takes the action
+
+        # TODO: Returns the state-action pair
+
+    def evaluate_step(self) -> None:
+        """Evaluates the action after the time step."""
+
+        # TODO: Observe new state
+
+        # TODO: Calculates the reward
+
+        # TODO: Create new experience (state, action, reward, next_state)
