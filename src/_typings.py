@@ -1,7 +1,7 @@
 """Generic typings for the project."""
 
+from collections import namedtuple
 from dataclasses import dataclass
-from typing import Any
 
 from traci._trafficlight import TrafficLightDomain
 
@@ -15,11 +15,4 @@ class TrafficLightSystem:
     phases: tuple[TrafficLightDomain.Phase]
 
 
-@dataclass
-class Experience:
-    """Dataclass for an experience in the replay memory."""
-
-    state: Any
-    action: Any
-    next_state: Any
-    reward: float
+Experience = namedtuple("Experience", ("state", "action", "next_state", "reward"))

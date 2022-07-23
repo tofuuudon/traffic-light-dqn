@@ -3,8 +3,6 @@
 from collections import deque
 from random import sample
 
-import numpy as np
-
 from _typings import Experience
 
 
@@ -45,9 +43,5 @@ class ReplayMemory:
         Returns:
             list[Experience]: The list of experiences drawn.
         """
-
-        print("RUNNING ----------------")
-        indices = np.random.choice(len(self.memory), batch_size, replace=False)
-        print([self.memory[idx] for idx in indices])
 
         return sample(self.memory, batch_size)

@@ -23,7 +23,7 @@ STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
 EPISODES = 1
-MAX_STEP = 500
+MAX_STEP = 33
 
 # Hyperparameters
 BATCH_SIZE = 32
@@ -49,11 +49,15 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 for ep in range(EPISODES):
     for step in range(MAX_STEP):
 
-        for agent in TLS_AGENTS:
-
-            agent.prepare_step()
+        sa_pairs = [agent.prepare_step() for agent in TLS_AGENTS]
 
         traci.simulationStep()
+
+        for idx, agent in enumerate(TLS_AGENTS):
+            state, action = sa_pairs[idx]
+            agent.evaluate_step(state, action)
+            agent.train(step)
+
     traci.simulation.loadState(START_STATE_PATH)
 
 

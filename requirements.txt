@@ -2,5 +2,5 @@ black
 pre-commit
 pylint
 traci
-pytorch-lightning
 mypy
+torch

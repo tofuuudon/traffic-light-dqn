@@ -2,13 +2,11 @@
 from typing import Any
 
 from torch.functional import Tensor
-from torch.nn.modules.activation import ReLU
-from torch.nn.modules.container import Sequential
-from torch.nn.modules.linear import Linear
-from pytorch_lightning.core.lightning import LightningModule
+from torch.nn import Linear, ReLU, Sequential, Module
+from torch.optim import Adam
 
 
-class PolicyModel(LightningModule):
+class PolicyModel(Module):
     """A simple MLP model"""
 
     def __init__(
@@ -16,6 +14,7 @@ class PolicyModel(LightningModule):
         obs_space: Tensor,
         n_actions: int,
         hidden_layers: int = 128,
+        learning_rate: float = 1e-3,
     ) -> None:
 
         super().__init__()
@@ -27,7 +26,9 @@ class PolicyModel(LightningModule):
             Linear(hidden_layers, n_actions),
         )
 
-    def forward(self, x: Tensor) -> Any:  # type: ignore
+        self.optimizer = Adam(self.parameters(), lr=learning_rate)
+
+    def forward(self, x: Tensor) -> Any:
         """Computes output tensors.
 
         Args:

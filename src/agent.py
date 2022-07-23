@@ -1,12 +1,12 @@
 """Deep Q-learning (DQN) agent."""
 
 from typing import Any
-from random import random
+from random import random, randrange
 import xml.etree.ElementTree as ET
 
 import torch
-from torch import Tensor
 import traci
+from torch.functional import Tensor
 
 from model import PolicyModel
 from replay_memory import ReplayMemory
@@ -14,6 +14,8 @@ from _typings import TrafficLightSystem, Experience
 
 ADDI_TREE = ET.parse("data/train-network/osm.additional.xml")
 DETECTOR_IDS = [tag.attrib["id"] for tag in ADDI_TREE.findall("e2Detector")]
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class Agent:
@@ -29,6 +31,7 @@ class Agent:
         gamma: float = 0.99,
         batch_size: int = 16,
         replay_size: int = 1000,
+        sync_rate: int = 10,
     ) -> None:
         """Instantiates the object.
 
@@ -49,18 +52,25 @@ class Agent:
         self.epsilon_decay = epsilon_decay
         self.gamma = gamma
         self.batch_size = batch_size
+        self.sync_rate = sync_rate
 
         # Enviroment
         self.tls_node = tls_node
 
-        # pylint: disable-next=no-member
-        obs_space = torch.reshape(self.__get_state(), (-1,))
-        n_actions = len(tls_node.phases)
+        self.obs_space = torch.reshape(self.__get_state(), (-1,))
+        self.n_actions = len(tls_node.phases)
 
         # Instances
-        self.net = PolicyModel(obs_space, n_actions)
-        self.target_net = PolicyModel(obs_space, n_actions)
+        self.net = PolicyModel(self.obs_space, self.n_actions)
+        self.target_net = PolicyModel(self.obs_space, self.n_actions)
         self.memory = ReplayMemory(replay_size)
+
+        self.__update_target_net()
+
+    def __update_target_net(self) -> None:
+        """Synchronizes the target network."""
+
+        self.target_net.load_state_dict(self.net.state_dict())
 
     def __get_state(self) -> Tensor:
         """Gets the current environment's state as a tensor.
@@ -69,7 +79,7 @@ class Agent:
             Tensor: The current state.
         """
 
-        return Tensor(
+        return torch.tensor(
             [[traci.lanearea.getJamLengthVehicle(det_id) for det_id in DETECTOR_IDS]]
         )
 
@@ -78,13 +88,13 @@ class Agent:
 
         state = self.__get_state()
 
-        if random() < self.epsilon and len(self.memory) >= self.batch_size:
-            return self.memory.sample(self.batch_size)
+        if random() > self.epsilon:
+            with torch.no_grad():
+                return self.net(state).max(1)[1].view(1, 1)
 
-        q_values = self.net(state)
-
-        # pylint: disable-next=no-member
-        return torch.argmax(q_values).item()
+        return torch.tensor(
+            [[randrange(self.n_actions)]], device=device, dtype=torch.long
+        )
 
     def __get_reward(self, state: Tensor) -> float:
         """Gets the reward of the given state.
@@ -96,7 +106,6 @@ class Agent:
             float: The calculated reward.
         """
 
-        # pylint: disable-next=no-member
         return torch.sum(state[0]).item()
 
     def prepare_step(self) -> tuple[Tensor, int]:
@@ -118,7 +127,25 @@ class Agent:
 
         self.memory.push(Experience(state, action, next_state, reward))
 
-    def update_epsilon(self) -> None:
-        """Updates the epsilon (explore-exploit) threshold."""
+    def train(self, step: int) -> None:
+        """Trains the agent using the replay memory.
 
-        self.epsilon = max(self.epsilon_min, self.epsilon_max * self.epsilon_decay)
+        Args:
+            step (int): Current time step of the simulation.
+        """
+
+        if len(self.memory) < self.batch_size:
+            return
+
+        exps = Experience(*zip(*self.memory.sample(self.batch_size)))
+
+        state_exps = torch.cat(exps.state)
+        action_exps = torch.cat(exps.action)
+
+        sa_values = self.net(state_exps).gather(1, action_exps)
+
+        # TODO: Finish algo
+        print(sa_values)
+
+        if step % self.sync_rate == 0:
+            self.__update_target_net()
