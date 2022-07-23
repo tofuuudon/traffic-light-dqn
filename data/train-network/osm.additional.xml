@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2022-07-23 16:37:30 by Eclipse SUMO netedit Version 1.13.0
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <!-- Detectors -->
+    <e2Detector id="GS_102025-1a" lane="4253850#6_0" pos="4.64" length="20.00" freq="300.00" file="e2_0.xml" friendlyPos="1"/>
+    <e2Detector id="GS_102025-2a" lane="672552145#0_0" pos="62.37" length="20.00" freq="300.00" file="e2_2.xml" friendlyPos="1"/>
+    <e2Detector id="GS_102025-2b" lane="672552145#0_1" pos="62.37" length="20.00" freq="300.00" file="e2_1.xml" friendlyPos="1"/>
+    <e2Detector id="GS_102025-3a" lane="148011238#2_0" pos="10.23" length="20.00" freq="300.00" file="e2_3.xml" friendlyPos="1"/>
+    <e2Detector id="GS_102025-4a" lane="-673997360#2_0" pos="4.38" length="15.00" freq="300.00" file="e2_0.xml"/>
+    <e2Detector id="GS_102025-4b" lane="-673997360#2_1" pos="4.38" length="15.00" freq="300.00" file="e2_4.xml"/>
+    <e2Detector id="GS_102031-1a" lane="-232917149#0_0" pos="17.87" length="20.00" freq="300.00" file="e2_0.xml" friendlyPos="1"/>
+    <e2Detector id="GS_102031-2a" lane="-232914380#2_0" pos="34.77" length="20.00" freq="300.00" file="e2_1.xml"/>
+    <e2Detector id="GS_102031-3a" lane="232917150#0_0" pos="12.82" length="20.00" freq="300.00" file="e2_2.xml"/>
+    <e2Detector id="GS_102031-4a" lane="672413240_0" pos="60.58" length="20.00" freq="300.00" file="e2_3.xml"/>
+    <e2Detector id="GS_102031-4b" lane="672413240_1" pos="60.58" length="20.00" freq="300.00" file="e2_4.xml"/>
+    <e2Detector id="GS_110007-1a" lane="-27178477#1_0" pos="17.83" length="20.00" freq="300.00" file="e2_0.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110007-2a" lane="-232917151#1_0" pos="36.64" length="20.00" freq="300.00" file="e2_0.xml"/>
+    <e2Detector id="GS_110007-3a" lane="4253841#1_0" pos="43.85" length="20.00" freq="300.00" file="e2_1.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110007-3b" lane="4253841#1_1" pos="43.85" length="20.00" freq="300.00" file="e2_2.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110007-4a" lane="232914379#0_0" pos="34.74" length="20.00" freq="300.00" file="e2_0.xml"/>
+    <e2Detector id="GS_110007-4b" lane="232914379#0_1" pos="34.74" length="20.00" freq="300.00" file="e2_1.xml"/>
+    <e2Detector id="GS_110008-1a" lane="-4253846#1_0" pos="8.56" length="20.00" freq="300.00" file="e2_4.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110008-2a" lane="672554397#0_0" pos="0.88" length="15.00" freq="300.00" file="e2_1.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110008-2b" lane="672554397#0_1" pos="0.88" length="15.00" freq="300.00" file="e2_0.xml" friendlyPos="1"/>
+    <e2Detector id="GS_110008-3a" lane="509350837#0_0" pos="9.29" length="20.00" freq="300.00" file="e2_2.xml"/>
+    <e2Detector id="GS_110008-4a" lane="-672552145#4_0" pos="62.37" length="20.00" freq="300.00" file="e2_3.xml"/>
+    <e2Detector id="GS_275423-1a" lane="491824130#3_0" pos="6.40" length="20.00" freq="300.00" file="e2_0.xml" friendlyPos="1"/>
+    <e2Detector id="GS_275423-2a" lane="-232914383#2_0" pos="60.52" length="20.00" freq="300.00" file="e2_1.xml"/>
+    <e2Detector id="GS_275423-3a" lane="-4253850#2_0" pos="13.56" length="20.00" freq="300.00" file="e2_2.xml" friendlyPos="1"/>
+    <e2Detector id="GS_275423-4a" lane="780679293#0_0" pos="33.98" length="20.00" freq="300.00" file="e2_3.xml"/>
+    <e2Detector id="GS_275423-4b" lane="780679293#0_1" pos="33.98" length="20.00" freq="300.00" file="e2_4.xml"/>
+</additional>

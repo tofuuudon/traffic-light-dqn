@@ -2,6 +2,7 @@
 
 from typing import Any
 from random import choice, random
+import xml.etree.ElementTree as ET
 
 import traci
 
@@ -10,6 +11,9 @@ from torch import Tensor, sum as t_sum  # pylint: disable=no-name-in-module
 from model import PolicyModel
 from replay_memory import ReplayMemory
 from _typings import TrafficLightSystem, Experience
+
+ADDI_TREE = ET.parse("data/train-network/osm.additional.xml")
+DETECTOR_IDS = [tag.attrib["id"] for tag in ADDI_TREE.findall("e2Detector")]
 
 
 class Agent:
@@ -65,14 +69,7 @@ class Agent:
         """
 
         return Tensor(
-            [
-                [
-                    traci.lanearea.getJamLengthVehicle(
-                        f"{self.tls_node.tls_id}-{lane_id}"
-                    )
-                    for lane_id in self.tls_node.lane_ids
-                ]
-            ]
+            [[traci.lanearea.getJamLengthVehicle(det_id) for det_id in DETECTOR_IDS]]
         )
 
     def __get_action(self) -> Any:

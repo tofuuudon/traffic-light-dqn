@@ -6,6 +6,7 @@ import sys
 import traci
 from sumolib import checkBinary
 
+from agent import Agent
 from _typings import TrafficLightSystem
 
 # Checks for SUMO_HOME enviroment
@@ -15,13 +16,13 @@ if "SUMO_HOME" in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-sumoBinary = checkBinary("sumo-gui")
+sumoBinary = checkBinary("sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 10
+EPISODES = 1
 MAX_STEP = 500
 
 traci.start(sumoCmd)
@@ -30,11 +31,13 @@ if not os.path.exists(START_STATE_PATH):
     traci.simulation.saveState(START_STATE_PATH)
 
 # IDs of all traffic lights
-TLS_NODES: tuple[TrafficLightSystem, ...] = tuple(
-    TrafficLightSystem(
-        tls_id,
-        traci.trafficlight.getControlledLanes(tls_id),
-        traci.trafficlight.getAllProgramLogics(tls_id)[0].phases,
+TLS_AGENTS: tuple[Agent, ...] = tuple(
+    Agent(
+        TrafficLightSystem(
+            tls_id,
+            traci.trafficlight.getControlledLanes(tls_id),
+            traci.trafficlight.getAllProgramLogics(tls_id)[0].phases,
+        )
     )
     for tls_id in traci.trafficlight.getIDList()
 )
