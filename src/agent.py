@@ -1,12 +1,12 @@
 """Deep Q-learning (DQN) agent."""
 
 from typing import Any
-from random import choice, random
+from random import random
 import xml.etree.ElementTree as ET
 
+import torch
+from torch import Tensor
 import traci
-
-from torch import Tensor, sum as t_sum  # pylint: disable=no-name-in-module
 
 from model import PolicyModel
 from replay_memory import ReplayMemory
@@ -53,7 +53,8 @@ class Agent:
         # Enviroment
         self.tls_node = tls_node
 
-        obs_space = self.__get_state().shape
+        # pylint: disable-next=no-member
+        obs_space = torch.reshape(self.__get_state(), (-1,))
         n_actions = len(tls_node.phases)
 
         # Instances
@@ -77,10 +78,13 @@ class Agent:
 
         state = self.__get_state()
 
-        if random() < self.epsilon:
-            return choice(self.memory.sample(self.batch_size)).action
+        if random() < self.epsilon and len(self.memory) >= self.batch_size:
+            return self.memory.sample(self.batch_size)
 
-        return self.net(state)
+        q_values = self.net(state)
+
+        # pylint: disable-next=no-member
+        return torch.argmax(q_values).item()
 
     def __get_reward(self, state: Tensor) -> float:
         """Gets the reward of the given state.
@@ -92,7 +96,8 @@ class Agent:
             float: The calculated reward.
         """
 
-        return t_sum(state[0]).item()
+        # pylint: disable-next=no-member
+        return torch.sum(state[0]).item()
 
     def prepare_step(self) -> tuple[Tensor, int]:
         """Prepares the action to take before time step."""

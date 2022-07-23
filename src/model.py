@@ -1,7 +1,6 @@
 """MLP model for predicting Q-values."""
 from typing import Any
 
-from torch._C import Size
 from torch.functional import Tensor
 from torch.nn.modules.activation import ReLU
 from torch.nn.modules.container import Sequential
@@ -14,22 +13,18 @@ class PolicyModel(LightningModule):
 
     def __init__(
         self,
-        obs_space: Size,
-        n_action: int,
+        obs_space: Tensor,
+        n_actions: int,
         hidden_layers: int = 128,
     ) -> None:
 
         super().__init__()
 
-        # Environment
-        self.obs_space = obs_space
-        self.n_action = n_action
-
         # Network
         self.net = Sequential(
-            Linear(len(obs_space), hidden_layers),
+            Linear(obs_space.shape[0], hidden_layers),
             ReLU(),
-            Linear(hidden_layers, n_action),
+            Linear(hidden_layers, n_actions),
         )
 
     def forward(self, x: Tensor) -> Any:  # type: ignore

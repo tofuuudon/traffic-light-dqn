@@ -51,9 +51,6 @@ for ep in range(EPISODES):
 
         for agent in TLS_AGENTS:
 
-            if len(agent.memory) < BATCH_SIZE:
-                continue
-
             agent.prepare_step()
 
         traci.simulationStep()
