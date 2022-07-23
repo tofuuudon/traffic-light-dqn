@@ -20,6 +20,11 @@ class ReplayMemory:
         """
         self.memory: deque[Experience] = deque([], maxlen=replay_size)
 
+    def __len__(self) -> int:
+        """Returns the length of the replay memory."""
+
+        return self.memory.__len__()
+
     def push(self, experience: Experience) -> None:
         """Pushes a new experience into the memory.
 

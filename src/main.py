@@ -25,6 +25,9 @@ START_STATE_PATH = "data/train-network/start.state.xml"
 EPISODES = 1
 MAX_STEP = 500
 
+# Hyperparameters
+BATCH_SIZE = 32
+
 traci.start(sumoCmd)
 
 if not os.path.exists(START_STATE_PATH):
@@ -45,6 +48,14 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 # Runner
 for ep in range(EPISODES):
     for step in range(MAX_STEP):
+
+        for agent in TLS_AGENTS:
+
+            if len(agent.memory) < BATCH_SIZE:
+                continue
+
+            agent.prepare_step()
+
         traci.simulationStep()
     traci.simulation.loadState(START_STATE_PATH)
 
