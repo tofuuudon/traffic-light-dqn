@@ -16,7 +16,7 @@ if "SUMO_HOME" in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-sumoBinary = checkBinary("sumo-gui")
+sumoBinary = checkBinary("sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 STEP = 0
