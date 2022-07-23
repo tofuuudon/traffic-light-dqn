@@ -1810,25 +1810,25 @@
         <param key="ref" value="A4380"/>
     </edge>
 
-    <tlLogic id="GS_102025" type="actuated" programID="0" offset="0">
-        <phase duration="38" state="GGggrrrrGGggrrrr" minDur="5" maxDur="50"/>
-        <phase duration="37" state="rrrrGGggrrrrGGgg" minDur="5" maxDur="50"/>
+    <tlLogic id="GS_102025" type="static" programID="0" offset="0">
+        <phase duration="38" state="GGggrrrrGGggrrrr" />
+        <phase duration="37" state="rrrrGGggrrrrGGgg" />
     </tlLogic>
-    <tlLogic id="GS_102031" type="actuated" programID="0" offset="0">
-        <phase duration="42" state="GGGggrrrrGGggrrrr" minDur="5" maxDur="50"/>
-        <phase duration="42" state="rrrrrGGggrrrrGGgg" minDur="5" maxDur="50"/>
+    <tlLogic id="GS_102031" type="static" programID="0" offset="0">
+        <phase duration="42" state="GGGggrrrrGGggrrrr" />
+        <phase duration="42" state="rrrrrGGggrrrrGGgg" />
     </tlLogic>
-    <tlLogic id="GS_110007" type="actuated" programID="0" offset="0">
-        <phase duration="38" state="GGGgrrrGggr" minDur="5" maxDur="50"/>
-        <phase duration="37" state="rrrrGGgrrrG" minDur="5" maxDur="50"/>
+    <tlLogic id="GS_110007" type="static" programID="0" offset="0">
+        <phase duration="38" state="GGGgrrrGggr" />
+        <phase duration="37" state="rrrrGGgrrrG" />
     </tlLogic>
-    <tlLogic id="GS_110008" type="actuated" programID="0" offset="0">
-        <phase duration="42" state="GGggrrrrGGGggrrrr" minDur="5" maxDur="50"/>
-        <phase duration="42" state="rrrrGGggrrrrrGGgg" minDur="5" maxDur="50"/>
+    <tlLogic id="GS_110008" type="static" programID="0" offset="0">
+        <phase duration="42" state="GGggrrrrGGGggrrrr" />
+        <phase duration="42" state="rrrrGGggrrrrrGGgg" />
     </tlLogic>
-    <tlLogic id="GS_275423" type="actuated" programID="0" offset="0">
-        <phase duration="42" state="GGggrrrrGGggrrrr" minDur="5" maxDur="50"/>
-        <phase duration="42" state="rrrrGGggrrrrGGgg" minDur="5" maxDur="50"/>
+    <tlLogic id="GS_275423" type="static" programID="0" offset="0">
+        <phase duration="42" state="GGggrrrrGGggrrrr" />
+        <phase duration="42" state="rrrrGGggrrrrGGgg" />
     </tlLogic>
 
     <junction id="102025" type="traffic_light" x="326.36" y="288.21" incLanes="-673997360#2_0 -673997360#2_1 148011238#2_0 672552145#0_0 672552145#0_1 4253850#6_0" intLanes=":102025_0_0 :102025_1_0 :102025_16_0 :102025_17_0 :102025_4_0 :102025_5_0 :102025_18_0 :102025_19_0 :102025_8_0 :102025_9_0 :102025_20_0 :102025_21_0 :102025_12_0 :102025_13_0 :102025_22_0 :102025_23_0" shape="322.31,279.35 331.51,282.10 331.66,284.49 332.40,285.52 333.57,286.43 335.19,287.24 337.25,287.93 335.54,294.10 333.28,293.93 332.38,294.25 331.64,294.86 331.06,295.73 330.63,296.88 321.37,294.36 321.20,291.83 320.44,290.73 319.22,289.73 317.54,288.85 315.41,288.07 317.37,281.98 319.64,282.21 320.54,281.91 321.29,281.34 321.88,280.48">

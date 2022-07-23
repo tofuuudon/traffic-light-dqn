@@ -23,7 +23,7 @@ class Agent:
         self,
         tls_node: TrafficLightSystem,
         alpha: float = 1e-2,
-        epsilon_max: float = 0.9,
+        epsilon_max: float = 0.99,
         epsilon_min: float = 0.05,
         epsilon_decay: float = 0.001,
         gamma: float = 0.99,
