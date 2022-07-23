@@ -22,8 +22,8 @@ sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 10
-MAX_STEP = 3600
+EPISODES = 1
+MAX_STEP = 500
 
 traci.start(sumoCmd)
 
