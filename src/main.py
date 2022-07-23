@@ -16,14 +16,14 @@ if "SUMO_HOME" in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-sumoBinary = checkBinary("sumo")
+sumoBinary = checkBinary("sumo-gui")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 1
-MAX_STEP = 500
+EPISODES = 10
+MAX_STEP = 3600
 
 traci.start(sumoCmd)
 
