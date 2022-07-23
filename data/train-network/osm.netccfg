@@ -7,12 +7,6 @@
         <osm-files value="osm_bbox.osm.xml.gz"/>
     </input>
 
-    <output>
-        <output-file value="osm.net.xml"/>
-        <output.street-names value="true"/>
-        <output.original-names value="true"/>
-    </output>
-
     <processing>
         <geometry.remove value="true"/>
         <roundabouts.guess value="true"/>
