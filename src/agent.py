@@ -4,26 +4,29 @@ from typing import Any
 from random import choice, random
 
 import traci
-from torch.functional import Tensor
+
+from torch import Tensor, sum as t_sum  # pylint: disable=no-name-in-module
 
 from model import PolicyModel
 from replay_memory import ReplayMemory
-from _typings import TrafficLightSystem
+from _typings import TrafficLightSystem, Experience
 
 
 class Agent:
-    """DQN model for TLS."""
+    """Deep Q-learning (DQN) agent for a traffic lignt node."""
 
     def __init__(
         self,
-        node: TrafficLightSystem,
+        tls_node: TrafficLightSystem,
         alpha: float = 1e-2,
-        epsilon: float = 0.5,
+        epsilon_max: float = 0.9,
+        epsilon_min: float = 0.05,
+        epsilon_decay: float = 0.001,
         gamma: float = 0.99,
         batch_size: int = 16,
         replay_size: int = 1000,
     ) -> None:
-        """__init__.
+        """Instantiates the object.
 
         Args:
             gamma (float): gamma
@@ -36,15 +39,18 @@ class Agent:
 
         # Hyperparameters
         self.alpha = alpha
-        self.epision = epsilon
+        self.epsilon = epsilon_max
+        self.epsilon_max = epsilon_max
+        self.epsilon_min = epsilon_min
+        self.epsilon_decay = epsilon_decay
         self.gamma = gamma
         self.batch_size = batch_size
 
         # Enviroment
-        self.node = node
+        self.tls_node = tls_node
 
         obs_space = self.__get_state().shape
-        n_actions = len(node.phases)
+        n_actions = len(tls_node.phases)
 
         # Instances
         self.net = PolicyModel(obs_space, n_actions)
@@ -52,44 +58,65 @@ class Agent:
         self.memory = ReplayMemory(replay_size)
 
     def __get_state(self) -> Tensor:
+        """Gets the current environment's state as a tensor.
+
+        Returns:
+            Tensor: The current state.
+        """
 
         return Tensor(
             [
                 [
-                    traci.lanearea.getJamLengthVehicle(f"{self.node.tls_id}-{lane_id}")
-                    for lane_id in self.node.lane_ids
+                    traci.lanearea.getJamLengthVehicle(
+                        f"{self.tls_node.tls_id}-{lane_id}"
+                    )
+                    for lane_id in self.tls_node.lane_ids
                 ]
             ]
         )
 
-    # pylint: disable-next=unused-private-member
     def __get_action(self) -> Any:
         """Gets an action from current simulation state."""
 
         state = self.__get_state()
 
-        if random() < self.epision:
-            action = choice(self.memory.sample(self.batch_size)).action
-        else:
-            action = self.net(state)
-        return action
+        if random() < self.epsilon:
+            return choice(self.memory.sample(self.batch_size)).action
 
-    def prepare_step(self) -> None:
+        return self.net(state)
+
+    def __get_reward(self, state: Tensor) -> float:
+        """Gets the reward of the given state.
+
+        Args:
+            state (Tensor): The state used to generate a reward value.
+
+        Returns:
+            float: The calculated reward.
+        """
+
+        return t_sum(state[0]).item()
+
+    def prepare_step(self) -> tuple[Tensor, int]:
         """Prepares the action to take before time step."""
 
-        # TODO: Gets the current state
+        state = self.__get_state()
+        action = self.__get_action()
 
-        # TODO: Gets the next action
+        # Takes the action
+        traci.trafficlight.setPhase(self.tls_node.tls_id, action)
 
-        # TODO: Takes the action
+        return (state, action)
 
-        # TODO: Returns the state-action pair
-
-    def evaluate_step(self) -> None:
+    def evaluate_step(self, state: Tensor, action: int) -> None:
         """Evaluates the action after the time step."""
 
-        # TODO: Observe new state
+        next_state = self.__get_state()
+        reward = self.__get_reward(next_state)
 
-        # TODO: Calculates the reward
+        self.memory.push(Experience(state, action, next_state, reward))
 
-        # TODO: Create new experience (state, action, reward, next_state)
+    def update_epsilon(self) -> None:
+        """Updates the epsilon (explore-exploit) threshold."""
+
+        self.epsilon = max(self.epsilon_min, self.epsilon_max * self.epsilon_decay)
