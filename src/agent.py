@@ -7,6 +7,8 @@ import xml.etree.ElementTree as ET
 import torch
 import traci
 from torch.functional import Tensor
+from torch.nn import SmoothL1Loss
+from torch.optim import RMSprop
 
 from model import PolicyModel
 from replay_memory import ReplayMemory
@@ -64,6 +66,7 @@ class Agent:
         self.net = PolicyModel(self.obs_space, self.n_actions)
         self.target_net = PolicyModel(self.obs_space, self.n_actions)
         self.memory = ReplayMemory(replay_size)
+        self.optimizer = RMSprop(self.net.parameters())
 
         self.__update_target_net()
 
@@ -102,7 +105,7 @@ class Agent:
             [[randrange(self.n_actions)]], device=device, dtype=torch.long
         )
 
-    def __get_reward(self, state: Tensor) -> float:
+    def __get_reward(self, state: Tensor, next_state: Tensor) -> Tensor:
         """Gets the reward of the given state.
 
         Args:
@@ -112,7 +115,7 @@ class Agent:
             float: The calculated reward.
         """
 
-        return torch.sum(state[0]).item()
+        return torch.tensor([[-torch.sum(state[0] - next_state[0]).item()]])
 
     def prepare_step(self) -> tuple[Tensor, int]:
         """Prepares the action to take before time step."""
@@ -125,13 +128,13 @@ class Agent:
 
         return (state, action)
 
-    def evaluate_step(self, state: Tensor, action: int) -> None:
+    def evaluate_step(self, state: Tensor) -> tuple[Tensor, Tensor]:
         """Evaluates the action after the time step."""
 
         next_state = self.__get_state()
-        reward = self.__get_reward(next_state)
+        reward = self.__get_reward(state, next_state)
 
-        self.memory.push(Experience(state, action, next_state, reward))
+        return (next_state, reward)
 
     def train(self, step: int) -> None:
         """Trains the agent using the replay memory.
@@ -145,12 +148,33 @@ class Agent:
 
         exps = Experience(*zip(*self.memory.sample(self.batch_size)))
 
+        non_final_mask = torch.tensor(
+            tuple(map(lambda s: s is not None, exps.next_state)),
+            device=device,
+            dtype=torch.bool,
+        )
+        non_final_next_states = torch.cat([s for s in exps.next_state if s is not None])
+
         state_exps = torch.cat(exps.state)
         action_exps = torch.cat(exps.action)
+        reward_exps = torch.cat(exps.reward)
 
         sa_values = self.net(state_exps).gather(1, action_exps)
 
-        print(sa_values)
+        next_state_values = torch.zeros(self.batch_size, device=device)
+        next_state_values[non_final_mask] = (
+            self.target_net(non_final_next_states).max(1)[0].detach()
+        )
+        expected_sa_values = (next_state_values * self.gamma) + reward_exps
+
+        criterion = SmoothL1Loss()
+        loss = criterion(sa_values, expected_sa_values.unsqueeze(1))
+
+        self.optimizer.zero_grad()
+        loss.backward()
+        for param in self.net.parameters():
+            param.grad.data.clamp_(-1, 1)
+        self.optimizer.step()
 
         if step % self.sync_rate == 0:
             self.__update_target_net()

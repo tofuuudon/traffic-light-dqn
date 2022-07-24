@@ -7,7 +7,7 @@ import traci
 from sumolib import checkBinary
 
 from agent import Agent
-from _typings import TrafficLightSystem
+from _typings import TrafficLightSystem, Experience
 
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
@@ -23,7 +23,7 @@ STEP = 0
 HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
 EPISODES = 1
-MAX_STEP = 33
+MAX_STEP = 500
 
 # Hyperparameters
 BATCH_SIZE = 32
@@ -45,8 +45,9 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
     for tls_id in traci.trafficlight.getIDList()
 )
 
-# Runner
+TOTAL_REWARD: float = 0
 for ep in range(EPISODES):
+    EPS_REWARD: float = 0
     for step in range(MAX_STEP):
 
         sa_pairs = [agent.prepare_step() for agent in TLS_AGENTS]
@@ -55,8 +56,13 @@ for ep in range(EPISODES):
 
         for idx, agent in enumerate(TLS_AGENTS):
             state, action = sa_pairs[idx]
-            agent.evaluate_step(state, action)
+            next_state, reward = agent.evaluate_step(state)
+            agent.memory.push(Experience(state, action, next_state, reward))
             agent.train(step)
+
+            EPS_REWARD += reward.reshape(-1)[0].item()
+
+    TOTAL_REWARD += EPS_REWARD
 
     traci.simulation.loadState(START_STATE_PATH)
 
