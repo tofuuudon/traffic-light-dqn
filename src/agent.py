@@ -80,7 +80,13 @@ class Agent:
         """
 
         return torch.tensor(
-            [[traci.lanearea.getJamLengthVehicle(det_id) for det_id in DETECTOR_IDS]]
+            [
+                [
+                    traci.lanearea.getJamLengthVehicle(det_id)
+                    for det_id in DETECTOR_IDS
+                    if self.tls_node.tls_id in det_id
+                ]
+            ]
         )
 
     def __get_action(self) -> Any:
@@ -144,7 +150,6 @@ class Agent:
 
         sa_values = self.net(state_exps).gather(1, action_exps)
 
-        # TODO: Finish algo
         print(sa_values)
 
         if step % self.sync_rate == 0:
