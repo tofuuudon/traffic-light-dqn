@@ -78,7 +78,6 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 # Tensorboard logger
 writter = SummaryWriter()
 
-TOTAL_REWARD: float = 0
 for ep in range(args.episodes):
     EPS_REWARD: float = 0
     for step in range(args.max_step):
@@ -96,7 +95,6 @@ for ep in range(args.episodes):
             EPS_REWARD += reward.reshape(-1)[0].item()
 
     writter.add_scalar("Episode reward", EPS_REWARD, ep)
-    TOTAL_REWARD += EPS_REWARD
 
     traci.simulation.loadState(START_STATE_PATH)
 
