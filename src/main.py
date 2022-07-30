@@ -1,4 +1,4 @@
-"""Instantiates SUMO with pre-defined network and config for DQN."""
+"""Instantiates SUMO with pre-defined network and configuration for DQN."""
 
 import os
 import sys
@@ -53,17 +53,14 @@ else:
 sumoBinary = checkBinary("sumo-gui" if args.gui else "sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
-START_STATE_PATH = "data/train-network/start.state.xml"
-
-# Hyperparameters
-BATCH_SIZE = 32
-
 traci.start(sumoCmd)
 
+# Create a new starting state file if not existing
+START_STATE_PATH = "data/train-network/start.state.xml"
 if not os.path.exists(START_STATE_PATH):
     traci.simulation.saveState(START_STATE_PATH)
 
-# IDs of all traffic lights
+# All TLS agents
 TLS_AGENTS: tuple[Agent, ...] = tuple(
     Agent(
         TrafficLightSystem(
@@ -78,24 +75,36 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 # Tensorboard logger
 writter = SummaryWriter()
 
+# Main simulation loop
 for ep in range(args.episodes):
     EPS_REWARD: float = 0
+
+    # Episode simulation stepper
     for step in range(args.max_step):
 
+        # Prepares action for each TLS agent
         sa_pairs = [agent.prepare_step(step) for agent in TLS_AGENTS]
 
         traci.simulationStep()
 
+        # In the next step, evaluate the action taken
         for idx, agent in enumerate(TLS_AGENTS):
             state, action = sa_pairs[idx]
             next_state, reward = agent.evaluate_step(state)
+
+            # Saves the experience
             agent.memory.push(Experience(state, action, next_state, reward))
+
+            # Performs training with epsilon greedy
             agent.train(step)
 
+            # Updates this episode's reward
             EPS_REWARD += reward.reshape(-1)[0].item()
 
+    # Saves data to tensorboard
     writter.add_scalar("Episode reward", EPS_REWARD, ep)
 
+    # Resets simulation after each episode
     traci.simulation.loadState(START_STATE_PATH)
 
 
