@@ -13,7 +13,7 @@ from torch.optim import RMSprop
 
 from model import PolicyModel
 from replay_memory import ReplayMemory
-from _typings import TrafficLightSystem, Experience
+from _typings import TrafficLightSystem, Experience, AgentConfig
 
 # XML tree of SUMO's additional file
 ADDI_TREE = ET.parse("data/train-network/osm.additional.xml")
@@ -28,23 +28,20 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class Agent:
     """Deep Q-learning (DQN) agent for a traffic lignt node."""
 
-    def __init__(
-        self,
-        tls_node: TrafficLightSystem,
-    ) -> None:
+    def __init__(self, tls_node: TrafficLightSystem, config: AgentConfig) -> None:
 
         super().__init__()
 
         # Hyperparameters
-        self.alpha: float = 1e-2
-        self.epsilon: float = 0.99
-        self.epsilon_max: float = 0.99
-        self.epsilon_min: float = 0.05
-        self.epsilon_decay: int = 1_800
-        self.gamma: float = 0.99
-        self.batch_size: int = 32
-        self.replay_size: int = 10_000
-        self.sync_rate: int = 10
+        self.alpha: float = config.alpha
+        self.epsilon: float = config.epsilon
+        self.epsilon_max: float = config.epsilon_max
+        self.epsilon_min: float = config.epsilon_min
+        self.epsilon_decay: int = config.epsilon_decay
+        self.gamma: float = config.gamma
+        self.batch_size: int = config.batch_size
+        self.replay_size: int = config.replay_size
+        self.sync_rate: int = config.sync_rate
 
         # Enviroment
         self.tls_node = tls_node

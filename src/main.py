@@ -9,7 +9,7 @@ from torch.utils.tensorboard.writer import SummaryWriter
 
 from agent import Agent
 from cli import CLI
-from _typings import TrafficLightSystem, Experience
+from _typings import TrafficLightSystem, Experience, AgentConfig
 
 # Args parser
 args = CLI().get_args()
@@ -37,6 +37,18 @@ START_STATE_PATH = "data/train-network/start.state.xml"
 if not os.path.exists(START_STATE_PATH):
     traci.simulation.saveState(START_STATE_PATH)
 
+agent_config = AgentConfig(
+    alpha=1e-2,
+    epsilon=0.99,
+    epsilon_max=0.99,
+    epsilon_min=0.05,
+    epsilon_decay=1_800,
+    gamma=0.99,
+    batch_size=32,
+    replay_size=10_000,
+    sync_rate=10,
+)
+
 # All TLS agents
 TLS_AGENTS: tuple[Agent, ...] = tuple(
     Agent(
@@ -44,7 +56,8 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
             tls_id,
             traci.trafficlight.getControlledLanes(tls_id),
             traci.trafficlight.getAllProgramLogics(tls_id)[0].phases,
-        )
+        ),
+        agent_config,
     )
     for tls_id in traci.trafficlight.getIDList()
 )
