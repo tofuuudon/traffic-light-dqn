@@ -18,7 +18,7 @@ class CLI:
             default=10,
         )
         self.parser.add_argument(
-            "--max_step",
+            "--max-step",
             metavar="\b",
             type=int,
             help="The maximum number of steps in each episode.",
