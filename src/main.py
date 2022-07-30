@@ -5,6 +5,7 @@ import sys
 
 import traci
 from sumolib import checkBinary
+from torch.utils.tensorboard.writer import SummaryWriter
 
 from agent import Agent
 from _typings import TrafficLightSystem, Experience
@@ -43,6 +44,9 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
     for tls_id in traci.trafficlight.getIDList()
 )
 
+# Tensorboard logger
+writter = SummaryWriter()
+
 TOTAL_REWARD: float = 0
 for ep in range(EPISODES):
     EPS_REWARD: float = 0
@@ -60,9 +64,11 @@ for ep in range(EPISODES):
 
             EPS_REWARD += reward.reshape(-1)[0].item()
 
+    writter.add_scalar("Episode reward", EPS_REWARD, ep)
     TOTAL_REWARD += EPS_REWARD
 
     traci.simulation.loadState(START_STATE_PATH)
 
 
+writter.close()
 traci.close()
