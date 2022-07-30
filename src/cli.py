@@ -87,4 +87,5 @@ class CLI:
         Returns:
             Namespace: All arguments from the CLI.
         """
+
         return self.parser.parse_args()
