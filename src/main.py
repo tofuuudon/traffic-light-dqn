@@ -21,8 +21,8 @@ sumoBinary = checkBinary("sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 10
-MAX_STEP = 1000
+EPISODES = 1
+MAX_STEP = 500
 
 # Hyperparameters
 BATCH_SIZE = 32

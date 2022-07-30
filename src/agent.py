@@ -117,7 +117,7 @@ class Agent:
 
         return action
 
-    def __get_reward(self, state: Tensor, next_state: Tensor) -> Tensor:
+    def __get_reward(self, state: Tensor) -> Tensor:
         """Gets the reward of the given state.
 
         Args:
@@ -127,7 +127,7 @@ class Agent:
             float: The calculated reward.
         """
 
-        return torch.tensor([[-torch.sum(state[0] - next_state[0]).item()]])
+        return torch.tensor([torch.pow(1.5, -torch.sum(state))])
 
     def prepare_step(self, step: int) -> tuple[Tensor, int]:
         """Prepares the action to take before time step."""
@@ -144,7 +144,7 @@ class Agent:
         """Evaluates the action after the time step."""
 
         next_state = self.__get_state()
-        reward = self.__get_reward(state, next_state)
+        reward = self.__get_reward(state)
 
         return (next_state, reward)
 
@@ -167,7 +167,7 @@ class Agent:
         reward_exps = torch.cat(exps.reward)
         next_states = torch.cat(exps.next_state)
 
-        # Q-values of current state
+        # Q-values from action action
         sa_values = self.net(state_exps).gather(1, action_exps)
 
         # Predicted next state q-values
