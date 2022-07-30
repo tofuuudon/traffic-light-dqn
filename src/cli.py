@@ -11,7 +11,6 @@ class CLI:
 
         # Simulation
         self.parser.add_argument(
-            "-e",
             "--episodes",
             metavar="\b",
             type=int,
@@ -19,7 +18,6 @@ class CLI:
             default=10,
         )
         self.parser.add_argument(
-            "-m",
             "--max_step",
             metavar="\b",
             type=int,
@@ -27,7 +25,6 @@ class CLI:
             default=3600,
         )
         self.parser.add_argument(
-            "-g",
             "--gui",
             action="store_true",
             help="Sets SUMO to launch with GUI.",
