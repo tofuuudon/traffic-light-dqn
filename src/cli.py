@@ -81,6 +81,13 @@ class CLI:
             default=10,
         )
 
+        # Models
+        self.parser.add_argument(
+            "--save-models",
+            action="store_true",
+            help="Saves the DQN model.",
+        )
+
     def get_args(self) -> Namespace:
         """Get arguments from CLI.
 

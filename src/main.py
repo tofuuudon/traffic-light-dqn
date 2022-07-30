@@ -2,7 +2,9 @@
 
 import os
 import sys
+from datetime import datetime
 
+import torch
 import traci
 from sumolib import checkBinary
 from torch.utils.tensorboard.writer import SummaryWriter
@@ -107,6 +109,24 @@ for ep in range(args.episodes):
     # Resets simulation after each episode
     traci.simulation.loadState(START_STATE_PATH)
 
+NOW = datetime.now().strftime("%d-%m-%YT%H:%M:%S")
+
+if not os.path.exists(f"models/{NOW}"):
+    os.mkdir(f"models/{NOW}")
+
+if args.save_models:
+    for agent in TLS_AGENTS:
+        tls_id = agent.tls_node.tls_id
+        if not os.path.exists(f"models/{NOW}/{tls_id}"):
+            os.mkdir(f"models/{NOW}/{tls_id}")
+        torch.save(
+            agent.net.state_dict(),
+            f"models/{NOW}/{tls_id}/policy-net.pt",
+        )
+        torch.save(
+            agent.target_net.state_dict(),
+            f"models/{NOW}/{tls_id}/policy-target-net.pt",
+        )
 
 writter.close()
 traci.close()
