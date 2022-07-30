@@ -2,6 +2,7 @@
 
 import os
 import sys
+from argparse import ArgumentParser
 
 import traci
 from sumolib import checkBinary
@@ -10,6 +11,37 @@ from torch.utils.tensorboard.writer import SummaryWriter
 from agent import Agent
 from _typings import TrafficLightSystem, Experience
 
+# CLI parser
+parser = ArgumentParser(description="CLI for SUMO RL")
+parser.add_argument(
+    "-e",
+    "--episodes",
+    metavar="\b",
+    type=int,
+    help="The number of episodes to run.",
+    default=10,
+)
+parser.add_argument(
+    "-m",
+    "--max_step",
+    metavar="\b",
+    type=int,
+    help="The maximum number of steps in each episode.",
+    default=3600,
+)
+parser.add_argument(
+    "-g",
+    "--gui",
+    action="store_true",
+    help="Sets SUMO to launch with GUI.",
+)
+args = parser.parse_args()
+
+print("\n========== Starting Simulation ==========")
+print(f"Mode: {'GUI' if args.gui else 'No GUI'}")
+print(f"Number of episodes: {args.episodes}")
+print(f"Maximum of steps: {args.max_step}\n")
+
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
     tools = os.path.join(os.environ["SUMO_HOME"], "tools")
@@ -17,12 +49,11 @@ if "SUMO_HOME" in os.environ:
 else:
     sys.exit("please declare environment variable 'SUMO_HOME'")
 
-sumoBinary = checkBinary("sumo")
+# Setup
+sumoBinary = checkBinary("sumo-gui" if args.gui else "sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 1
-MAX_STEP = 500
 
 # Hyperparameters
 BATCH_SIZE = 32
@@ -48,9 +79,9 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 writter = SummaryWriter()
 
 TOTAL_REWARD: float = 0
-for ep in range(EPISODES):
+for ep in range(args.episodes):
     EPS_REWARD: float = 0
-    for step in range(MAX_STEP):
+    for step in range(args.max_step):
 
         sa_pairs = [agent.prepare_step(step) for agent in TLS_AGENTS]
 
