@@ -8,7 +8,7 @@ from math import exp
 import torch
 import traci
 from torch.functional import Tensor
-from torch.nn import SmoothL1Loss
+from torch.nn import MSELoss
 from torch.optim import RMSprop
 
 from model import PolicyModel
@@ -33,7 +33,7 @@ class Agent:
         epsilon_decay: float = 1800,
         gamma: float = 0.99,
         batch_size: int = 16,
-        replay_size: int = 1000,
+        replay_size: int = 10000,
         sync_rate: int = 10,
     ) -> None:
         """Instantiates the object.
@@ -172,14 +172,16 @@ class Agent:
         next_state_values = self.target_net(next_states).max(1)[0].detach()
         expected_sa_values = (next_state_values * self.gamma) + reward_exps
 
-        criterion = SmoothL1Loss()
+        criterion = MSELoss()
         loss = criterion(sa_values, expected_sa_values.unsqueeze(1))
 
+        # Update weights and optimize model
         self.optimizer.zero_grad()
         loss.backward()
         for param in self.net.parameters():
             param.grad.data.clamp_(-1, 1)
         self.optimizer.step()
 
+        # Update target net according to sync rate
         if step % self.sync_rate == 0:
             self.__update_target_net()
