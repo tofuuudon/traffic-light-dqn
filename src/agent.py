@@ -167,11 +167,14 @@ class Agent:
         reward_exps = torch.cat(exps.reward)
         next_states = torch.cat(exps.next_state)
 
+        # Q-values of current state
         sa_values = self.net(state_exps).gather(1, action_exps)
 
+        # Predicted next state q-values
         next_state_values = self.target_net(next_states).max(1)[0].detach()
         expected_sa_values = (next_state_values * self.gamma) + reward_exps
 
+        # Loss function
         criterion = MSELoss()
         loss = criterion(sa_values, expected_sa_values.unsqueeze(1))
 
