@@ -33,7 +33,6 @@ class Agent:
         super().__init__()
 
         # Hyperparameters
-        self.alpha: float = config.alpha
         self.epsilon: float = config.epsilon
         self.epsilon_max: float = config.epsilon_max
         self.epsilon_min: float = config.epsilon_min

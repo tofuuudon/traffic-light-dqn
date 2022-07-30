@@ -19,6 +19,16 @@ print(f"Mode: {'GUI' if args.gui else 'No GUI'}")
 print(f"Number of episodes: {args.episodes}")
 print(f"Maximum of steps: {args.max_step}\n")
 
+
+print("\n========== Agent Configuration ==========")
+print(f"Max epsilon: {args.epsilon_max}")
+print(f"Min epsilon: {args.epsilon_min}")
+print(f"Epsilon decay: {args.epsilon_decay}")
+print(f"Gamma: {args.gamma}")
+print(f"Batch size: {args.batch_size}")
+print(f"Replay size: {args.replay_size}")
+print(f"Sync rate: {args.sync_rate}\n")
+
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
     tools = os.path.join(os.environ["SUMO_HOME"], "tools")
@@ -37,16 +47,16 @@ START_STATE_PATH = "data/train-network/start.state.xml"
 if not os.path.exists(START_STATE_PATH):
     traci.simulation.saveState(START_STATE_PATH)
 
+# Configuration for all agents
 agent_config = AgentConfig(
-    alpha=1e-2,
-    epsilon=0.99,
-    epsilon_max=0.99,
-    epsilon_min=0.05,
-    epsilon_decay=1_800,
-    gamma=0.99,
-    batch_size=32,
-    replay_size=10_000,
-    sync_rate=10,
+    epsilon=args.epsilon_max,
+    epsilon_max=args.epsilon_max,
+    epsilon_min=args.epsilon_min,
+    epsilon_decay=args.epsilon_decay,
+    gamma=args.gamma,
+    batch_size=args.batch_size,
+    replay_size=args.replay_size,
+    sync_rate=args.sync_rate,
 )
 
 # All TLS agents

@@ -19,7 +19,6 @@ class TrafficLightSystem:
 class AgentConfig:
     """Configuration for the agent."""
 
-    alpha: float
     epsilon: float
     epsilon_max: float
     epsilon_min: float
