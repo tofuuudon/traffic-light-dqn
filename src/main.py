@@ -2,40 +2,17 @@
 
 import os
 import sys
-from argparse import ArgumentParser
 
 import traci
 from sumolib import checkBinary
 from torch.utils.tensorboard.writer import SummaryWriter
 
 from agent import Agent
+from cli import CLI
 from _typings import TrafficLightSystem, Experience
 
-# CLI parser
-parser = ArgumentParser(description="CLI for SUMO RL")
-parser.add_argument(
-    "-e",
-    "--episodes",
-    metavar="\b",
-    type=int,
-    help="The number of episodes to run.",
-    default=10,
-)
-parser.add_argument(
-    "-m",
-    "--max_step",
-    metavar="\b",
-    type=int,
-    help="The maximum number of steps in each episode.",
-    default=3600,
-)
-parser.add_argument(
-    "-g",
-    "--gui",
-    action="store_true",
-    help="Sets SUMO to launch with GUI.",
-)
-args = parser.parse_args()
+# Args parser
+args = CLI().get_args()
 
 print("\n========== Starting Simulation ==========")
 print(f"Mode: {'GUI' if args.gui else 'No GUI'}")
