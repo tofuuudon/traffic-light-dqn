@@ -1,8 +1,9 @@
 """Deep Q-learning (DQN) agent."""
 
+import xml.etree.ElementTree as ET
 from typing import Any
 from random import random, randrange
-import xml.etree.ElementTree as ET
+from math import exp
 
 import torch
 import traci
@@ -29,7 +30,7 @@ class Agent:
         alpha: float = 1e-2,
         epsilon_max: float = 0.99,
         epsilon_min: float = 0.05,
-        epsilon_decay: float = 0.001,
+        epsilon_decay: float = 1800,
         gamma: float = 0.99,
         batch_size: int = 16,
         replay_size: int = 1000,
@@ -92,18 +93,29 @@ class Agent:
             ]
         )
 
-    def __get_action(self) -> Any:
+    def __get_action(self, step: int) -> Any:
         """Gets an action from current simulation state."""
 
         state = self.__get_state()
 
+        action: Any
+
+        # Exploit and get max Q
         if random() > self.epsilon:
             with torch.no_grad():
-                return self.net(state).max(1)[1].view(1, 1)
+                action = self.net(state).max(1)[1].view(1, 1)
 
-        return torch.tensor(
+        # Explore actions randomly
+        action = torch.tensor(
             [[randrange(self.n_actions)]], device=device, dtype=torch.long
         )
+
+        # Adjusts explore-exploit rate
+        self.epsilon = self.epsilon_min + (self.epsilon_max - self.epsilon_min) * exp(
+            -1.0 * step / self.epsilon_decay
+        )
+
+        return action
 
     def __get_reward(self, state: Tensor, next_state: Tensor) -> Tensor:
         """Gets the reward of the given state.
@@ -117,11 +129,11 @@ class Agent:
 
         return torch.tensor([[-torch.sum(state[0] - next_state[0]).item()]])
 
-    def prepare_step(self) -> tuple[Tensor, int]:
+    def prepare_step(self, step: int) -> tuple[Tensor, int]:
         """Prepares the action to take before time step."""
 
         state = self.__get_state()
-        action = self.__get_action()
+        action = self.__get_action(step)
 
         # Takes the action
         traci.trafficlight.setPhase(self.tls_node.tls_id, action)
@@ -143,28 +155,21 @@ class Agent:
             step (int): Current time step of the simulation.
         """
 
+        # Skips training if there's not enough experience
         if len(self.memory) < self.batch_size:
             return
 
+        # List of all previous experiences
         exps = Experience(*zip(*self.memory.sample(self.batch_size)))
-
-        non_final_mask = torch.tensor(
-            tuple(map(lambda s: s is not None, exps.next_state)),
-            device=device,
-            dtype=torch.bool,
-        )
-        non_final_next_states = torch.cat([s for s in exps.next_state if s is not None])
 
         state_exps = torch.cat(exps.state)
         action_exps = torch.cat(exps.action)
         reward_exps = torch.cat(exps.reward)
+        next_states = torch.cat(exps.next_state)
 
         sa_values = self.net(state_exps).gather(1, action_exps)
 
-        next_state_values = torch.zeros(self.batch_size, device=device)
-        next_state_values[non_final_mask] = (
-            self.target_net(non_final_next_states).max(1)[0].detach()
-        )
+        next_state_values = self.target_net(next_states).max(1)[0].detach()
         expected_sa_values = (next_state_values * self.gamma) + reward_exps
 
         criterion = SmoothL1Loss()

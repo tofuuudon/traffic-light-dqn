@@ -19,11 +19,9 @@ else:
 sumoBinary = checkBinary("sumo")
 sumoCmd = [sumoBinary, "-W", "-c", "data/train-network/osm.sumocfg"]
 
-STEP = 0
-HOURS = 20
 START_STATE_PATH = "data/train-network/start.state.xml"
-EPISODES = 1
-MAX_STEP = 500
+EPISODES = 10
+MAX_STEP = 1000
 
 # Hyperparameters
 BATCH_SIZE = 32
@@ -50,7 +48,7 @@ for ep in range(EPISODES):
     EPS_REWARD: float = 0
     for step in range(MAX_STEP):
 
-        sa_pairs = [agent.prepare_step() for agent in TLS_AGENTS]
+        sa_pairs = [agent.prepare_step(step) for agent in TLS_AGENTS]
 
         traci.simulationStep()
 
