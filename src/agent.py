@@ -15,9 +15,13 @@ from model import PolicyModel
 from replay_memory import ReplayMemory
 from _typings import TrafficLightSystem, Experience
 
+# XML tree of SUMO's additional file
 ADDI_TREE = ET.parse("data/train-network/osm.additional.xml")
+
+# Gets all the detectors' IDs
 DETECTOR_IDS = [tag.attrib["id"] for tag in ADDI_TREE.findall("e2Detector")]
 
+# GPU support
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -27,35 +31,20 @@ class Agent:
     def __init__(
         self,
         tls_node: TrafficLightSystem,
-        alpha: float = 1e-2,
-        epsilon_max: float = 0.99,
-        epsilon_min: float = 0.05,
-        epsilon_decay: float = 1800,
-        gamma: float = 0.99,
-        batch_size: int = 16,
-        replay_size: int = 10000,
-        sync_rate: int = 10,
     ) -> None:
-        """Instantiates the object.
-
-        Args:
-            gamma (float): gamma
-            alpha (float): alpha
-            batch_size (int): batch_size
-            replay_size (int): replay_size
-        """
 
         super().__init__()
 
         # Hyperparameters
-        self.alpha = alpha
-        self.epsilon = epsilon_max
-        self.epsilon_max = epsilon_max
-        self.epsilon_min = epsilon_min
-        self.epsilon_decay = epsilon_decay
-        self.gamma = gamma
-        self.batch_size = batch_size
-        self.sync_rate = sync_rate
+        self.alpha: float = 1e-2
+        self.epsilon: float = 0.99
+        self.epsilon_max: float = 0.99
+        self.epsilon_min: float = 0.05
+        self.epsilon_decay: int = 1_800
+        self.gamma: float = 0.99
+        self.batch_size: int = 32
+        self.replay_size: int = 10_000
+        self.sync_rate: int = 10
 
         # Enviroment
         self.tls_node = tls_node
@@ -66,7 +55,7 @@ class Agent:
         # Instances
         self.net = PolicyModel(self.obs_space, self.n_actions)
         self.target_net = PolicyModel(self.obs_space, self.n_actions)
-        self.memory = ReplayMemory(replay_size)
+        self.memory = ReplayMemory(self.replay_size)
         self.optimizer = RMSprop(self.net.parameters())
 
         self.__update_target_net()
