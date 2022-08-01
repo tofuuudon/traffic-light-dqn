@@ -23,6 +23,12 @@ class PolicyModel(Module):
         self.net = Sequential(
             Linear(obs_space.shape[0], hidden_layers),
             ReLU(),
+            Linear(hidden_layers, hidden_layers),
+            ReLU(),
+            Linear(hidden_layers, hidden_layers),
+            ReLU(),
+            Linear(hidden_layers, hidden_layers),
+            ReLU(),
             Linear(hidden_layers, n_actions),
         )
 
