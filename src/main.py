@@ -106,8 +106,12 @@ for ep in range(args.episodes):
     # Saves data to tensorboard
     writter.add_scalar("Episode reward", EPS_REWARD, ep)
 
+    print(f"\n========= Episode {ep + 1} =========")
+    print(f"Episode Reward: {EPS_REWARD}")
+
     # Resets simulation after each episode
     traci.simulation.loadState(START_STATE_PATH)
+    print()
 
 NOW = datetime.now().strftime("%d-%m-%YT%H:%M:%S")
 
