@@ -103,16 +103,25 @@ for ep in range(args.episodes):
             # Updates this episode's reward
             eps_reward += reward.reshape(-1)[0].item()
 
-    vehicleIds: list[str] = traci.vehicle.getIDList()
+    # Gets simulation data
+    vehicle_ids: list[str] = traci.vehicle.getIDList()
+    waiting_times = map(traci.vehicle.getWaitingTime, vehicle_ids)
+    time_loss = map(traci.vehicle.getTimeLoss, vehicle_ids)
+    avg_waiting_time = sum(waiting_times) / len(vehicle_ids)
+    avg_time_loss = sum(time_loss) / len(vehicle_ids)
 
     if isinstance(writter, SummaryWriter):
         # Saves data to tensorboard
         writter.add_scalar("Episode reward", eps_reward, ep)
-        writter.add_scalar("Vehicle count", len(vehicleIds), ep)
+        writter.add_scalar("Vehicle count", len(vehicle_ids), ep)
+        writter.add_scalar("Avg. waiting time", avg_waiting_time, ep)
+        writter.add_scalar("Avg. time loss", avg_time_loss, ep)
 
     print(f"\n========= Episode {ep + 1} =========")
     print(f"Episode Reward: {eps_reward}")
-    print(f"Vehicle count: {len(vehicleIds)}")
+    print(f"Vehicle count: {len(vehicle_ids)}")
+    print(f"Avg. waiting time: {avg_waiting_time}")
+    print(f"Avg. time loss: {avg_time_loss}")
 
     # Resets simulation after each episode
     traci.simulation.loadState(START_STATE_PATH)
