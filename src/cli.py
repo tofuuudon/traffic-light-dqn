@@ -83,6 +83,11 @@ class CLI:
 
         # Models
         self.parser.add_argument(
+            "--log",
+            action="store_true",
+            help="Logs each episode to Tensorboard.",
+        )
+        self.parser.add_argument(
             "--save-models",
             action="store_true",
             help="Saves the DQN model.",

@@ -75,7 +75,7 @@ TLS_AGENTS: tuple[Agent, ...] = tuple(
 )
 
 # Tensorboard logger
-writter = SummaryWriter()
+writter = SummaryWriter() if args.log else None
 
 # Main simulation loop
 for ep in range(args.episodes):
@@ -103,8 +103,9 @@ for ep in range(args.episodes):
             # Updates this episode's reward
             EPS_REWARD += reward.reshape(-1)[0].item()
 
-    # Saves data to tensorboard
-    writter.add_scalar("Episode reward", EPS_REWARD, ep)
+    if isinstance(writter, SummaryWriter):
+        # Saves data to tensorboard
+        writter.add_scalar("Episode reward", EPS_REWARD, ep)
 
     print(f"\n========= Episode {ep + 1} =========")
     print(f"Episode Reward: {EPS_REWARD}")
@@ -132,5 +133,7 @@ if args.save_models:
             f"models/{NOW}/{tls_id}/policy-target-net.pt",
         )
 
-writter.close()
+if isinstance(writter, SummaryWriter):
+    writter.close()
+
 traci.close()
