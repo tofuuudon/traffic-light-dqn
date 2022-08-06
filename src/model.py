@@ -16,8 +16,8 @@ class PolicyModel(Module):
         self,
         obs_space: Tensor,
         n_actions: int,
-        hidden_size: int = 128,
-        num_layers: int = 1,
+        hidden_size: int = 5,
+        num_layers: int = 5,
         learning_rate: float = 1e-3,
     ) -> None:
 
