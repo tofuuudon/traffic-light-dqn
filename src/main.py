@@ -31,6 +31,10 @@ print(f"Batch size: {args.batch_size}")
 print(f"Replay size: {args.replay_size}")
 print(f"Sync rate: {args.sync_rate}\n")
 
+print("\n========== Other Configuration ==========")
+print(f"Save policy models: {args.save_models}")
+print(f"Tensorboard logging: {args.log}\n")
+
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
     tools = os.path.join(os.environ["SUMO_HOME"], "tools")
