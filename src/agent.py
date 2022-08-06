@@ -45,7 +45,7 @@ class Agent:
         # Enviroment
         self.tls_node = tls_node
 
-        self.obs_space = torch.reshape(self.__get_state(), (-1,))
+        self.obs_space = self.__get_state()
         self.n_actions = len(tls_node.phases)
 
         # Instances
@@ -74,7 +74,7 @@ class Agent:
                     traci.lanearea.getJamLengthVehicle(det_id)
                     for det_id in DETECTOR_IDS
                     if self.tls_node.tls_id in det_id
-                ]
+                ],
             ]
         )
 
