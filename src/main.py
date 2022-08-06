@@ -79,7 +79,7 @@ writter = SummaryWriter() if args.log else None
 
 # Main simulation loop
 for ep in range(args.episodes):
-    EPS_REWARD: float = 0
+    eps_reward: float = 0
 
     # Episode simulation stepper
     for step in range(args.max_step):
@@ -101,14 +101,18 @@ for ep in range(args.episodes):
             agent.train(step)
 
             # Updates this episode's reward
-            EPS_REWARD += reward.reshape(-1)[0].item()
+            eps_reward += reward.reshape(-1)[0].item()
+
+    vehicleIds: list[str] = traci.vehicle.getIDList()
 
     if isinstance(writter, SummaryWriter):
         # Saves data to tensorboard
-        writter.add_scalar("Episode reward", EPS_REWARD, ep)
+        writter.add_scalar("Episode reward", eps_reward, ep)
+        writter.add_scalar("Vehicle count", len(vehicleIds), ep)
 
     print(f"\n========= Episode {ep + 1} =========")
-    print(f"Episode Reward: {EPS_REWARD}")
+    print(f"Episode Reward: {eps_reward}")
+    print(f"Vehicle count: {len(vehicleIds)}")
 
     # Resets simulation after each episode
     traci.simulation.loadState(START_STATE_PATH)
