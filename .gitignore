@@ -1,7 +1,7 @@
 .DS_Store
 __pycache__/
 logs/
-output/
+data/**/output/*.xml
 
 # PyCharm
 .idea/
