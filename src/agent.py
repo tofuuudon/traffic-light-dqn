@@ -54,6 +54,10 @@ class Agent:
         self.memory = ReplayMemory(self.replay_size)
         self.optimizer = RMSprop(self.net.parameters())
 
+        # State
+        self.phase_duration = 0
+        self.current_action = torch.tensor([[0]], device=device, dtype=torch.long)
+
         self.__update_target_net()
 
     def __update_target_net(self) -> None:
@@ -81,6 +85,11 @@ class Agent:
     def __get_action(self, step: int) -> Any:
         """Gets an action from current simulation state."""
 
+        if self.phase_duration < 10:
+            return self.current_action
+
+        self.phase_duration = 0
+
         state = self.__get_state()
 
         action: Any
@@ -99,6 +108,8 @@ class Agent:
         self.epsilon = self.epsilon_min + (self.epsilon_max - self.epsilon_min) * exp(
             -1.0 * step / self.epsilon_decay
         )
+
+        self.current_action = action
 
         return action
 
@@ -122,6 +133,8 @@ class Agent:
 
         # Takes the action
         traci.trafficlight.setPhase(self.tls_node.tls_id, action)
+
+        self.phase_duration += 1
 
         return (state, action)
 
