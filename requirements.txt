@@ -4,3 +4,4 @@ pylint
 traci
 mypy
 torch
+tensorboard
