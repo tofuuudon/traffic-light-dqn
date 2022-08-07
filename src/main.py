@@ -116,8 +116,8 @@ for ep in range(args.episodes):
     vehicle_ids: list[str] = traci.vehicle.getIDList()
     waiting_times = map(traci.vehicle.getWaitingTime, vehicle_ids)
     time_loss = map(traci.vehicle.getTimeLoss, vehicle_ids)
-    avg_waiting_time = sum(waiting_times) / len(vehicle_ids)
-    avg_time_loss = sum(time_loss) / len(vehicle_ids)
+    avg_waiting_time = sum(waiting_times) / (len(vehicle_ids) or 1)
+    avg_time_loss = sum(time_loss) / (len(vehicle_ids) or 1)
 
     if isinstance(writter, SummaryWriter):
         # Saves data to tensorboard
