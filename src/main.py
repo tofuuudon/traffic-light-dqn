@@ -33,7 +33,8 @@ print(f"Sync rate: {args.sync_rate}\n")
 
 print("\n========== Other Configuration ==========")
 print(f"Save policy models: {args.save_models}")
-print(f"Tensorboard logging: {args.log}\n")
+print(f"Tensorboard logging: {args.log}")
+print(f"Use AI: {not args.no_ai}\n")
 
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
@@ -87,6 +88,10 @@ for ep in range(args.episodes):
 
     # Episode simulation stepper
     for step in range(args.max_step):
+
+        if args.no_ai:
+            traci.simulationStep()
+            continue
 
         # Prepares action for each TLS agent
         sa_pairs = [agent.prepare_step(step) for agent in TLS_AGENTS]

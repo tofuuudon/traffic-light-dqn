@@ -29,6 +29,11 @@ class CLI:
             action="store_true",
             help="Sets SUMO to launch with GUI.",
         )
+        self.parser.add_argument(
+            "--no-ai",
+            action="store_true",
+            help="Sets SUMO to not use the DQN.",
+        )
 
         # Agent
         self.parser.add_argument(
