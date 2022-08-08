@@ -1,0 +1,951 @@
+***Starting server on port 46813 ***
+Loading net-file from 'data/train-network/osm.net.xml' ... done (30ms).
+Loading additional-files from 'data/train-network/osm.additional.xml' ... 
+done (16ms).
+Loading done.
+Simulation version 1.12.0 started with time: 0.00
+Loading state from 'data/train-network/start.state.xml' ... 
+done (41ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (26ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (26ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (26ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (27ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (47ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (32ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (27ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (26ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (27ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+
+========== Starting Simulation ==========
+Mode: No GUI
+Number of episodes: 100
+Maximum of steps: 3600
+
+
+========== Agent Configuration ==========
+Max epsilon: 0.99
+Min epsilon: 0.05
+Epsilon decay: 1800
+Gamma: 0.99
+Batch size: 32
+Replay size: 10000
+Sync rate: 10
+
+
+========== Other Configuration ==========
+Save policy models: True
+Tensorboard logging: True
+Use AI: True
+
+ Retrying in 1 seconds
+
+========= Episode 1 =========
+Episode Reward: 5105.112214647466
+Vehicle count: 482
+Avg. waiting time: 223.98547717842322
+Avg. time loss: 1105.6032672737776
+
+
+========= Episode 2 =========
+Episode Reward: 17997.666666805744
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 3 =========
+Episode Reward: 17982.666667521
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 4 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 5 =========
+Episode Reward: 17960.88888937235
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 6 =========
+Episode Reward: 17991.333333849907
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 7 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 8 =========
+Episode Reward: 17971.666667103767
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 9 =========
+Episode Reward: 17991.222222417593
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 10 =========
+Episode Reward: 17998.00000011921
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 11 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 12 =========
+Episode Reward: 17979.777778059244
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 13 =========
+Episode Reward: 17992.000000476837
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 14 =========
+Episode Reward: 17992.333333790302
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 15 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 16 =========
+Episode Reward: 17994.1111112535
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 17 =========
+Episode Reward: 17941.666667997837
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 18 =========
+Episode Reward: 17979.66666725278
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 19 =========
+Episode Reward: 17993.666667044163
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 20 =========
+Episode Reward: 17990.666667222977
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 21 =========
+Episode Reward: 17993.666667044163
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 22 =========
+Episode Reward: 17966.000000417233
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 23 =========
+Episode Reward: 17985.222222417593
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 24 =========
+Episode Reward: 17998.00000011921
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 25 =========
+Episode Reward: 17977.444444686174
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 26 =========
+Episode Reward: 17992.55555576086
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 27 =========
+Episode Reward: 17995.666666924953
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 28 =========
+Episode Reward: 17986.555555850267
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 29 =========
+Episode Reward: 17997.666666805744
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 30 =========
+Episode Reward: 17979.88888913393
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 31 =========
+Episode Reward: 17990.22222238779
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 32 =========
+Episode Reward: 17989.444444596767
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 33 =========
+Episode Reward: 17991.666667163372
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 34 =========
+Episode Reward: 17980.00000101328
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 35 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 36 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 37 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 38 =========
+Episode Reward: 17985.777778416872
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 39 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 40 =========
+Episode Reward: 17997.33333349228
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 41 =========
+Episode Reward: 17997.666666805744
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 42 =========
+Episode Reward: 17965.33333414793
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 43 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 44 =========
+Episode Reward: 17988.888889044523
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 45 =========
+Episode Reward: 17992.000000476837
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 46 =========
+Episode Reward: 17972.00000166893
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 47 =========
+Episode Reward: 17997.33333349228
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 48 =========
+Episode Reward: 17992.666667103767
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 49 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 50 =========
+Episode Reward: 17995.000000298023
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 51 =========
+Episode Reward: 17994.333333671093
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 52 =========
+Episode Reward: 17972.111111670732
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 53 =========
+Episode Reward: 17997.000000178814
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 54 =========
+Episode Reward: 17990.666667222977
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 55 =========
+Episode Reward: 17981.333334445953
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 56 =========
+Episode Reward: 17987.333334088326
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 57 =========
+Episode Reward: 17993.444444715977
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 58 =========
+Episode Reward: 17994.333333671093
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 59 =========
+Episode Reward: 17984.777778029442
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 60 =========
+Episode Reward: 17968.888889610767
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 61 =========
+Episode Reward: 17996.333333462477
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (27ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (27ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (30ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (25ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (24ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Loading state from 'data/train-network/start.state.xml' ... 
+done (23ms).
+Simulation ended at time: 0.00
+Reason: TraCI requested termination.
+Performance: 
+ Duration: 29546.13s
+ TraCI-Duration: 29526.55s
+ Real time factor: 0
+ UPS: 28.500790
+Vehicles: 
+ Inserted: 0 (Loaded: 2)
+ Running: 0
+ Waiting: 0
+Teleports: 339 (Collisions: 1, Jam: 125, Yield: 142, Wrong Lane: 71)
+Statistics (avg):
+ RouteLength: 323.52
+ Speed: 4.09
+ Duration: 253.00
+ WaitingTime: 190.38
+ TimeLoss: 205.17
+ DepartDelay: 13.08
+
+DijkstraRouter answered 2008 queries and explored 46.10 edges on average.
+DijkstraRouter spent 0.12s answering queries (0.06ms on average).
+
+========= Episode 62 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 63 =========
+Episode Reward: 17988.444444924593
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 64 =========
+Episode Reward: 17986.888889163733
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 65 =========
+Episode Reward: 17998.00000011921
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 66 =========
+Episode Reward: 17995.000000298023
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 67 =========
+Episode Reward: 17987.00000023842
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 68 =========
+Episode Reward: 17997.33333349228
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 69 =========
+Episode Reward: 17995.33333361149
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 70 =========
+Episode Reward: 17987.00000077486
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 71 =========
+Episode Reward: 17978.000001311302
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 72 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 73 =========
+Episode Reward: 17985.666667521
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 74 =========
+Episode Reward: 17993.444444715977
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 75 =========
+Episode Reward: 17985.555556178093
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 76 =========
+Episode Reward: 17994.333333671093
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 77 =========
+Episode Reward: 17988.777777969837
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 78 =========
+Episode Reward: 17993.88888901472
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 79 =========
+Episode Reward: 17997.666666805744
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 80 =========
+Episode Reward: 17997.33333349228
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 81 =========
+Episode Reward: 17986.555555850267
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 82 =========
+Episode Reward: 17992.222222447395
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 83 =========
+Episode Reward: 17977.666667997837
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 84 =========
+Episode Reward: 17985.333333581686
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 85 =========
+Episode Reward: 17994.333333671093
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 86 =========
+Episode Reward: 17986.666666924953
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 87 =========
+Episode Reward: 17997.666666805744
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 88 =========
+Episode Reward: 17988.555555731058
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 89 =========
+Episode Reward: 17996.111111223698
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 90 =========
+Episode Reward: 17990.888889104128
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 91 =========
+Episode Reward: 17979.000001251698
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 92 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 93 =========
+Episode Reward: 17987.888889193535
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 94 =========
+Episode Reward: 17952.11111152172
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 95 =========
+Episode Reward: 17999.000000059605
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 96 =========
+Episode Reward: 17988.666667342186
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 97 =========
+Episode Reward: 17994.666666984558
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 98 =========
+Episode Reward: 17995.777777910233
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 99 =========
+Episode Reward: 18000.0
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
+
+========= Episode 100 =========
+Episode Reward: 17995.000000298023
+Vehicle count: 0
+Avg. waiting time: 0.0
+Avg. time loss: 0.0
+
