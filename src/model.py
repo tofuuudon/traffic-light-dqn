@@ -14,7 +14,6 @@ class PolicyModel(Module):
         self,
         obs_space: Tensor,
         n_actions: int,
-        hidden_layers: int = 128,
         num_layers: int = 2,
         learning_rate: float = 1e-3,
     ) -> None:
@@ -29,9 +28,11 @@ class PolicyModel(Module):
 
         # Network
         self.model = Sequential(
-            Linear(obs_space.shape[0], hidden_layers),
+            Linear(obs_space.shape[0], 128),
             ReLU(),
-            Linear(hidden_layers, n_actions),
+            Linear(128, 64),
+            ReLU(),
+            Linear(64, n_actions),
         )
 
         self.optimizer = Adam(self.parameters(), lr=learning_rate)
