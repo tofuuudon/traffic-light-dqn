@@ -45,7 +45,7 @@ class Agent:
         # Enviroment
         self.tls_node = tls_node
 
-        self.obs_space = self.__get_state()
+        self.obs_space = torch.reshape(self.__get_state(), (-1,))
         self.n_actions = len(tls_node.phases)
 
         # Instances
