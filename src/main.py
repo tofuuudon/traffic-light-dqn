@@ -138,10 +138,9 @@ for ep in range(args.episodes):
 
 NOW = datetime.now().strftime("%d-%m-%YT%H:%M:%S")
 
-if not os.path.exists(f"models/{NOW}"):
-    os.mkdir(f"models/{NOW}")
-
 if args.save_models:
+    if not os.path.exists(f"models/{NOW}"):
+        os.mkdir(f"models/{NOW}")
     for agent in TLS_AGENTS:
         tls_id = agent.tls_node.tls_id
         if not os.path.exists(f"models/{NOW}/{tls_id}"):
