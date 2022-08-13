@@ -76,7 +76,7 @@ class CLI:
             metavar="\b",
             type=int,
             help="The size of the replay memory.",
-            default=1_000,
+            default=10_000,
         )
         self.parser.add_argument(
             "--sync-rate",
