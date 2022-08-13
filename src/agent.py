@@ -49,8 +49,10 @@ class Agent:
         self.n_actions = len(tls_node.phases)
 
         # Instances
-        self.net = PolicyModel(self.obs_space, self.n_actions)
-        self.target_net = PolicyModel(self.obs_space, self.n_actions)
+        self.net = PolicyModel(self.obs_space, self.n_actions, config.model_variant)
+        self.target_net = PolicyModel(
+            self.obs_space, self.n_actions, config.model_variant
+        )
         self.memory = ReplayMemory(self.replay_size)
         self.optimizer = RMSprop(self.net.parameters())
 

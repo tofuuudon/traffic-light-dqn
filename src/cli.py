@@ -97,6 +97,13 @@ class CLI:
             action="store_true",
             help="Saves the DQN model.",
         )
+        self.parser.add_argument(
+            "--model-variant",
+            metavar="\b",
+            type=int,
+            help="The variant of the model.",
+            default=0,
+        )
 
     def get_args(self) -> Namespace:
         """Get arguments from CLI.

@@ -27,6 +27,7 @@ class AgentConfig:
     batch_size: int
     replay_size: int
     sync_rate: int
+    model_variant: int
 
 
 Experience = namedtuple("Experience", ("state", "action", "next_state", "reward"))

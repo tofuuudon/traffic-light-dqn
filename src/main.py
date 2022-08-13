@@ -35,6 +35,7 @@ print("\n========== Other Configuration ==========")
 print(f"Save policy models: {args.save_models}")
 print(f"Tensorboard logging: {args.log}")
 print(f"Use AI: {not args.no_ai}\n")
+print(f"Model variant: {args.model_variant}\n")
 
 # Checks for SUMO_HOME enviroment
 if "SUMO_HOME" in os.environ:
@@ -64,6 +65,7 @@ agent_config = AgentConfig(
     batch_size=args.batch_size,
     replay_size=args.replay_size,
     sync_rate=args.sync_rate,
+    model_variant=args.model_variant,
 )
 
 # All TLS agents
