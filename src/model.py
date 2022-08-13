@@ -49,8 +49,6 @@ class PolicyModel(Module):
                 Linear(128, n_actions),
             )
 
-        print(self.model)
-
         self.optimizer = Adam(self.parameters(), lr=1e-3)
 
     def forward(self, x: Tensor) -> Any:
