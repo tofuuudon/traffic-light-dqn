@@ -34,7 +34,7 @@ print(f"Sync rate: {args.sync_rate}\n")
 print("\n========== Other Configuration ==========")
 print(f"Save policy models: {args.save_models}")
 print(f"Tensorboard logging: {args.log}")
-print(f"Use AI: {not args.no_ai}\n")
+print(f"Use AI: {not args.no_ai}")
 print(f"Model variant: {args.model_variant}\n")
 
 # Checks for SUMO_HOME enviroment
