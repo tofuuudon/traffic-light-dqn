@@ -30,9 +30,7 @@ class PolicyModel(Module):
         self.model = Sequential(
             Linear(obs_space.shape[0], 128),
             ReLU(),
-            Linear(128, 64),
-            ReLU(),
-            Linear(64, n_actions),
+            Linear(128, n_actions),
         )
 
         self.optimizer = Adam(self.parameters(), lr=learning_rate)
