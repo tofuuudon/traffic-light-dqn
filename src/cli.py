@@ -55,7 +55,7 @@ class CLI:
             metavar="\b",
             type=int,
             help="The proportional decay of epsilon in steps.",
-            default=1_800,
+            default=700,
         )
         self.parser.add_argument(
             "--gamma",
