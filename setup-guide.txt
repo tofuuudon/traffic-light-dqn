@@ -1,0 +1,19 @@
+Setup guide for this project
+============================
+
+Note
+----
+- If you're not sure about these instructions you can try and run this project using Docker.
+- You will need to build the docker image and run it in a container.
+- You can always use the Dockerfile as a guide to how you could set up this project.
+
+
+Setup
+-----
+1. Install SUMO onto your system. Please follow the installation guide here and follow the instructions strictly: https://sumo.dlr.de/docs/Installing/index.html
+2. Create a new python environment in this project using 'python -m venv <ENVIRONMENT NAME>'
+3. Activate the new environment using 'source <ENVIRONMENT NAME>/bin/activate'
+4. Install all dependencies using 'pip install -r requirements.txt'
+5. You are ready to run the project, use 'python src/main.py' to run the default configuration. Else, you can use 'python src/main.py -h' to bring up the help menu for the custom CLI.
+
+IMPORTANT: If you wish to use GUI for the simulation, you must follow additional steps to install XQuartz. Else, don't use the --gui flag and stick with the command-line version.
