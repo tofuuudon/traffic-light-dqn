@@ -167,7 +167,7 @@ class Agent:
         reward_exps = torch.cat(exps.reward)
         next_states = torch.cat(exps.next_state)
 
-        # Q-values from action action
+        # Q-values from current state-action
         sa_values = self.net(state_exps).gather(1, action_exps)
 
         # Predicted next state q-values
