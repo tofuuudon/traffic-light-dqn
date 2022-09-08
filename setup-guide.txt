@@ -23,3 +23,15 @@ Setup
 5. You are ready to run the project, use 'python src/main.py' to run the default configuration. Else, you can use 'python src/main.py -h' to bring up the help menu for the custom CLI.
 
 IMPORTANT: If you wish to use GUI for the simulation, you must follow additional steps to install XQuartz. Else, don't use the --gui flag and stick with the command-line version.
+
+Docker Setup
+------------
+
+If you decided to use Docker instead, then this is the quickest way to run this project. First you need to download Docker: https://docs.docker.com/get-docker/
+
+This will get you the CLI for Docker. Then in the terminal and in the project root.
+
+1. Run 'docker build -t traffic-dqn .'
+2. Wait for the build to finish
+3. Run 'docker run traffic-dqn'
+4. You should see the project running with the default setting to start training. You will see logs of episodes being completed and the performance matrix for each. 
