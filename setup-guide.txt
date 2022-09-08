@@ -34,4 +34,5 @@ This will get you the CLI for Docker. Then in the terminal and in the project ro
 1. Run 'docker build -t traffic-dqn .'
 2. Wait for the build to finish
 3. Run 'docker run traffic-dqn'
-4. You should see the project running with the default setting to start training. You will see logs of episodes being completed and the performance matrix for each. 
+4. You should see the project running with the default setting to start training.
+5. You will see logs like 'Loading state from data/train-network/start.state.xml'. This indicates the artefact is working and running.
