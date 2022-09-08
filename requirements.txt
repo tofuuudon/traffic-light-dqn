@@ -5,3 +5,6 @@ traci
 mypy
 torch
 tensorboard
+scipy
+seaborn
+matplotlib
