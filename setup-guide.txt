@@ -1,6 +1,12 @@
 Setup guide for this project
 ============================
 
+Requirements
+------------
+- Python 10 and above
+- SUMO
+- PIP dependencies
+
 Note
 ----
 - If you're not sure about these instructions you can try and run this project using Docker.
