@@ -37,7 +37,3 @@ To conclude and in comparison to the existing literature, it seems that placing 
 
 I would also like to thank Dr Shakeel Ahmad, Dr Drishty Sobnath, and Prins Butt for their teaching and guidance over the course of my degree. I would like to especially thank Dr Nick Whitelegg and Dr Olufemi Isiaq for their continuous support and dedication to my research.
 
-## Publication
-
-In-progress...
-
